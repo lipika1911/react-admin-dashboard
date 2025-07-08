@@ -1,19 +1,24 @@
+import Home from "./pages/home/Home";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import Users from "./pages/users/Users";
+import Products from "./pages/products/Products";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
+import Menu from "./components/menu/Menu";
+import Login from "./pages/login/Login";
+import "./styles/global.scss";
 import {
-  createBrowserRouter,
-  RouterProvider, Outlet
-} from "react-router";
-import Users from './pages/users/Users.tsx';
-import Products from './pages/products/Products.tsx';
-import Home from './pages/home/Home.tsx';
-import Navbar from "./components/navbar/Navbar.tsx";
-import Footer from "./components/footer/Footer.tsx";
-import Menu from "./components/menu/Menu.tsx";
-import Login from "./pages/Login/Login.tsx";
-import "./styles/global.scss"
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import User from "./pages/user/User";
+import Product from "./pages/product/Product";
+
+
+const queryClient = new QueryClient();
 
 function App() {
-
-   const Layout = () => {
+  const Layout = () => {
     return (
       <div className="main">
         <Navbar />
@@ -22,13 +27,15 @@ function App() {
             <Menu />
           </div>
           <div className="contentContainer">
-            <Outlet />
+            <QueryClientProvider client={queryClient}>
+              <Outlet />
+            </QueryClientProvider>
           </div>
         </div>
         <Footer />
       </div>
-    )
-   }
+    );
+  };
 
   const router = createBrowserRouter([
     {
@@ -46,18 +53,24 @@ function App() {
         {
           path: "/products",
           element: <Products />,
-        }
-      ]
+        },
+        {
+          path: "/users/:id",
+          element: <User />,
+        },
+        {
+          path: "/products/:id",
+          element: <Product />,
+        },
+      ],
     },
     {
       path: "/login",
-      element: <Login />
-    }
+      element: <Login />,
+    },
   ]);
 
-  return (
-    <RouterProvider router={router}/>
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
