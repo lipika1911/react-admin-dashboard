@@ -12,7 +12,7 @@ import {
 } from "@tanstack/react-query";
 import User from "./pages/user/User";
 import Product from "./pages/product/Product";
-import Login from "./pages/login/Login";
+import Login from "./pages/loginpage/Login";
 
 
 const queryClient = new QueryClient();
