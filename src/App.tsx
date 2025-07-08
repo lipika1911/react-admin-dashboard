@@ -9,6 +9,7 @@ import Navbar from "./components/navbar/Navbar.tsx";
 import Footer from "./components/footer/Footer.tsx";
 import Menu from "./components/menu/Menu.tsx";
 import Login from "./pages/Login/Login.tsx";
+import "./styles/global.scss"
 
 function App() {
 
